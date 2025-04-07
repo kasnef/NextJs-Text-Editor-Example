@@ -1,0 +1,98 @@
+/* Code block styles */
+.ProseMirror pre {
+  background-color: #f3f4f6 !important;
+  padding: 1rem !important;
+  border-radius: 0.5rem !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  overflow-x: auto !important;
+  margin: 1rem 0 !important;
+  border: 1px solid #e5e7eb !important;
+  color: #1f2937 !important;
+}
+
+.ProseMirror pre code {
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: inherit !important;
+  color: inherit !important;
+  white-space: pre !important;
+  border: none !important;
+}
+
+/* Syntax highlighting */
+.ProseMirror pre .hljs-comment,
+.ProseMirror pre .hljs-quote {
+  color: #6b7280 !important;
+  font-style: italic !important;
+}
+
+.ProseMirror pre .hljs-keyword,
+.ProseMirror pre .hljs-selector-tag,
+.ProseMirror pre .hljs-subst {
+  color: #7c3aed !important;
+  font-weight: bold !important;
+}
+
+.ProseMirror pre .hljs-string,
+.ProseMirror pre .hljs-doctag {
+  color: #059669 !important;
+}
+
+.ProseMirror pre .hljs-number {
+  color: #db2777 !important;
+}
+
+.ProseMirror pre .hljs-literal {
+  color: #16a34a !important;
+}
+
+.ProseMirror pre .hljs-title,
+.ProseMirror pre .hljs-section,
+.ProseMirror pre .hljs-selector-id {
+  color: #2563eb !important;
+  font-weight: bold !important;
+}
+
+.ProseMirror pre .hljs-type,
+.ProseMirror pre .hljs-class .hljs-title {
+  color: #e11d48 !important;
+  font-weight: bold !important;
+}
+
+.ProseMirror pre .hljs-tag,
+.ProseMirror pre .hljs-name,
+.ProseMirror pre .hljs-attribute {
+  color: #2563eb !important;
+}
+
+.ProseMirror pre .hljs-variable {
+  color: #7c3aed !important;
+}
+
+.ProseMirror pre .hljs-template-variable {
+  color: #7c3aed !important;
+}
+
+.ProseMirror pre .hljs-regexp,
+.ProseMirror pre .hljs-link {
+  color: #16a34a !important;
+}
+
+.ProseMirror pre .hljs-symbol,
+.ProseMirror pre .hljs-bullet {
+  color: #9333ea !important;
+}
+
+/* Inline code styles */
+.ProseMirror p code {
+  background-color: #f3f4f6 !important;
+  padding: 0.2rem 0.4rem !important;
+  border-radius: 0.25rem !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+  font-size: 0.875em !important;
+  color: #1f2937 !important;
+  border: 1px solid #e5e7eb !important;
+} 
