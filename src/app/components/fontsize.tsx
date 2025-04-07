@@ -2,7 +2,7 @@
 
 import { useEditor } from "@tiptap/react";
 import { useState } from "react";
-import { Type } from "lucide-react";
+import { ChevronDown, Type } from "lucide-react";
 
 interface FontSizeProps {
   editor: ReturnType<typeof useEditor>;
@@ -39,10 +39,11 @@ const FontSize = ({ editor }: FontSizeProps) => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 hover:bg-gray-100 rounded"
+        className="p-2 hover:bg-gray-100 rounded flex items-center gap-1"
         title="Font Size"
       >
         <Type className="text-black" />
+        <ChevronDown className="text-black w-4 h-4" />
       </button>
       {isOpen && (
         <div className="absolute top-full left-0 mt-1 bg-white border rounded-lg shadow-lg z-10">

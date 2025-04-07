@@ -32,6 +32,9 @@ import {
   ChevronDown,
 } from "lucide-react";
 import TextAlign from '@tiptap/extension-text-align';
+import BulletList from '@tiptap/extension-bullet-list';
+import OrderedList from '@tiptap/extension-ordered-list';
+import HeadingExtension from '@tiptap/extension-heading';
 
 import { FontSize } from "./font-size-extension";
 import FontSizeControl from "./fontsize";
@@ -61,6 +64,22 @@ const TextEditor = ({ onSave }: TextEditorProps) => {
     extensions: [
       StarterKit.configure({
         codeBlock: false,
+        heading: false,
+        bulletList: false,
+        orderedList: false,
+      }),
+      HeadingExtension.configure({
+        levels: [1, 2, 3, 4, 5, 6],
+      }),
+      BulletList.configure({
+        HTMLAttributes: {
+          class: 'list-disc pl-4',
+        },
+      }),
+      OrderedList.configure({
+        HTMLAttributes: {
+          class: 'list-decimal pl-4',
+        },
       }),
       Underline,
       Document,
