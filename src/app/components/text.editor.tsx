@@ -14,7 +14,7 @@ import Highlight from "@tiptap/extension-highlight";
 import Code from "@tiptap/extension-code";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { common, createLowlight } from 'lowlight';
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Bold,
   Heading,
@@ -26,22 +26,37 @@ import {
   Code2,
   Palette,
   Highlighter,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  ChevronDown,
 } from "lucide-react";
+import TextAlign from '@tiptap/extension-text-align';
 
 import { FontSize } from "./font-size-extension";
 import FontSizeControl from "./fontsize";
-import UploadButton from "./ui/button.upload";
 import './code-block.css';
+import { ImageAlign } from "./image-align-extension";
+import UploadButton from "./ui/button.upload";
 
 const lowlight = createLowlight(common);
 
-const TextEditor = () => {
+interface TextEditorProps {
+  onSave: (content: string) => void;
+}
+
+const TextEditor = ({ onSave }: TextEditorProps) => {
+  // State hooks
   const [headingLevel, setHeadingLevel] = useState(1);
   const [postContent, setPostContent] = useState<any>(null);
   const [files, setFiles] = useState<File[]>([]);
+  const [showAlignDropdown, setShowAlignDropdown] = useState(false);
+
+  // Ref hooks
   const textColorPickerRef = useRef<HTMLInputElement>(null);
   const bgColorPickerRef = useRef<HTMLInputElement>(null);
 
+  // Editor hook
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -68,16 +83,27 @@ const TextEditor = () => {
       Highlight.configure({
         multicolor: true,
       }),
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
+      ImageAlign,
     ],
     content: "",
     editorProps: {
       attributes: {
         class:
-          "prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none min-h-[250px] bg-white [&_.ProseMirror]:text-black",
+          "prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none min-h-[250px] bg-white [&_.ProseMirror]:text-black [&_img]:max-w-full [&_img]:max-h-[400px] [&_img]:object-contain [&_img]:cursor-pointer [&_img]:select-all [&_img]:mx-auto",
       },
     },
     immediatelyRender: false,
   });
+
+  // Effect hooks
+  useEffect(() => {
+    if (postContent) {
+      onSave(postContent);
+    }
+  }, [postContent, onSave]);
 
   if (!editor) {
     return null;                                                                                                                                                          
@@ -97,7 +123,12 @@ const TextEditor = () => {
         .focus()
         .insertContent({
           type: "image",
-          attrs: { src: previewUrl, "data-temp": true },
+          attrs: { 
+            src: previewUrl, 
+            "data-temp": true,
+            style: "max-width: 100%; max-height: 400px; display: block; margin: 0 auto;",
+            class: "mx-auto"
+          },
         })
         .run();
     });
@@ -191,8 +222,9 @@ const TextEditor = () => {
         <div className="w-full p-2">
           <div className="flex space-x-2 mb-2">
             <div className="relative hover:bg-gray-100 rounded">
-              <button className={`p-2 hover:bg-gray-100 rounded`}>
+              <button className={`p-2 hover:bg-gray-100 rounded flex items-center gap-1`}>
                 <Heading className="text-black" />
+                <ChevronDown className="text-black w-4 h-4" />
               </button>
               <select
                 value={headingLevel}
@@ -303,6 +335,71 @@ const TextEditor = () => {
             >
               <ListOrdered className="text-black" />
             </button>
+            <div className="relative">
+              <button
+                onClick={() => setShowAlignDropdown(!showAlignDropdown)}
+                className={`p-2 hover:bg-gray-100 rounded flex items-center gap-1`}
+                title="Căn lề"
+              >
+                <AlignLeft className="text-black" />
+                <ChevronDown className="text-black w-4 h-4" />
+              </button>
+              {showAlignDropdown && (
+                <div className="absolute top-full left-0 mt-1 bg-white border rounded shadow-lg z-10">
+                  <button
+                    onClick={() => {
+                      if (editor.isActive('image')) {
+                        editor.chain().focus().setImageAlign('left').run();
+                      } else {
+                        editor.chain().focus().setTextAlign('left').run();
+                      }
+                      setShowAlignDropdown(false);
+                    }}
+                    className={`w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center gap-2 ${
+                      (editor.isActive('image', { align: 'left' }) || editor.isActive({ textAlign: 'left' })) 
+                        ? "bg-gray-200" 
+                        : ""
+                    }`}
+                  >
+                    <AlignLeft className="text-black w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (editor.isActive('image')) {
+                        editor.chain().focus().setImageAlign('center').run();
+                      } else {
+                        editor.chain().focus().setTextAlign('center').run();
+                      }
+                      setShowAlignDropdown(false);
+                    }}
+                    className={`w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center gap-2 ${
+                      (editor.isActive('image', { align: 'center' }) || editor.isActive({ textAlign: 'center' })) 
+                        ? "bg-gray-200" 
+                        : ""
+                    }`}
+                  >
+                    <AlignCenter className="text-black w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (editor.isActive('image')) {
+                        editor.chain().focus().setImageAlign('right').run();
+                      } else {
+                        editor.chain().focus().setTextAlign('right').run();
+                      }
+                      setShowAlignDropdown(false);
+                    }}
+                    className={`w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center gap-2 ${
+                      (editor.isActive('image', { align: 'right' }) || editor.isActive({ textAlign: 'right' })) 
+                        ? "bg-gray-200" 
+                        : ""
+                    }`}
+                  >
+                    <AlignRight className="text-black w-4 h-4" />
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
           <EditorContent 
             editor={editor} 
