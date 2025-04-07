@@ -1,6 +1,8 @@
 # NextJs-Text-Editor-Example
 NextJs Text Editor Example (WYSIWYG Editor using NextJs 15 and Tailwind/postcss)
 
+![image](https://github.com/user-attachments/assets/c5c685bd-d7a3-44bb-aa56-128cafa4a605)
+
 ## Demo
 https://next-js-text-editor-example-mgufdfjpe-calangthang1406s-projects.vercel.app
 
