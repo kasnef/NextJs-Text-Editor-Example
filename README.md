@@ -4,7 +4,7 @@ NextJs Text Editor Example (WYSIWYG Editor using Tiptap, NextJs 15 and Tailwind/
 ![image](https://github.com/user-attachments/assets/a2705ae6-387d-4fdb-8ee2-5335f4d31b61)
 
 ## Demo
-https://next-js-text-editor-example-mgufdfjpe-calangthang1406s-projects.vercel.app
+https://next-js-text-editor-example.vercel.app/
 
 ## Getting Started
 
