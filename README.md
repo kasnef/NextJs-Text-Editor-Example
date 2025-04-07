@@ -1,4 +1,7 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NextJs-Text-Editor-Example
+NextJs Text Editor Example (WYSIWYG Editor using NextJs 15 and Tailwind/postcss)
+
+## Demo
 
 ## Getting Started
 
